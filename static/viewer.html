@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PhoneCam · Viewer</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="viewer">
+  <div class="stage" id="stage">
+    <video id="video" autoplay playsinline muted></video>
+    <div class="overlay mono" id="overlay"></div>
+    <div class="rec hidden" id="recBadge">● REC <span id="recTime">0:00</span></div>
+    <div class="waiting" id="waiting">
+      <div>
+        <div id="waitTitle" style="font-size:16px;font-weight:600">Waiting for the phone…</div>
+        <div class="muted" id="waitSub">On your phone, open:</div>
+        <img id="qr" class="hidden" alt="QR code for the phone URL">
+        <div class="mono url" id="phoneUrl"></div>
+      </div>
+    </div>
+  </div>
+
+  <aside>
+    <section>
+      <h2>Connection</h2>
+      <div class="row"><label>Server</label><span><span class="dot" id="wsDot"></span><span id="wsText">…</span></span></div>
+      <div class="row"><label>Phone</label><span><span class="dot" id="phoneDot"></span><span id="phoneText">…</span></span></div>
+      <div class="btns"><button id="reconnectBtn">Reconnect stream</button></div>
+    </section>
+
+    <section id="cameraSection">
+      <h2>Camera</h2>
+      <div class="row"><label>Lens</label><select id="device"></select></div>
+      <div class="row"><label>Facing</label>
+        <div class="seg" id="facing">
+          <button data-v="environment">Back</button><button data-v="user">Front</button>
+        </div>
+      </div>
+      <div class="row"><label>Resolution</label><select id="resolution"></select></div>
+      <div class="row"><label>Frame rate</label><select id="fps"></select></div>
+      <div class="row hidden" id="zoomRow"><label>Zoom</label>
+        <div class="slider-row"><input type="range" id="zoom"><span class="mono val" id="zoomVal"></span></div>
+      </div>
+      <div class="row hidden" id="torchRow"><label>Torch</label><input type="checkbox" id="torch"></div>
+      <div class="hint" id="actualHint"></div>
+    </section>
+
+    <section id="encodingSection">
+      <h2>Encoding</h2>
+      <div class="row"><label>Quality</label><select id="quality"></select></div>
+      <div class="row"><label>Bitrate</label>
+        <div class="slider-row"><input type="range" id="bitrate" min="0" max="100" step="1"><span class="mono val" id="bitrateVal"></span></div>
+      </div>
+      <div class="row"><label>When limited</label>
+        <select id="degradation">
+          <option value="balanced">Balanced</option>
+          <option value="maintain-framerate">Keep it smooth (drop resolution)</option>
+          <option value="maintain-resolution">Keep it sharp (drop frames)</option>
+        </select>
+      </div>
+      <div class="row"><label>Codec</label><select id="codec"></select></div>
+      <div class="row"><label>Audio</label><input type="checkbox" id="audio"></div>
+    </section>
+
+    <section>
+      <h2>View (this PC only)</h2>
+      <div class="row"><label>Fit</label>
+        <div class="seg" id="fit"><button data-v="contain">Fit</button><button data-v="cover">Fill</button></div>
+      </div>
+      <div class="row"><label>Rotate</label>
+        <div class="seg" id="rotate"><button data-v="0">0°</button><button data-v="90">90°</button><button data-v="180">180°</button><button data-v="270">270°</button></div>
+      </div>
+      <div class="row"><label>Mirror</label><input type="checkbox" id="mirror"></div>
+      <div class="btns">
+        <button id="snapBtn">📷 Snapshot</button>
+        <button id="recBtn">⏺ Record</button>
+        <button id="fsBtn">⛶ Fullscreen</button>
+      </div>
+      <div class="hint">Keys: <b>F</b> fullscreen · <b>H</b> hide panel · <b>S</b> snapshot. Add <span class="mono">?clean</span> to the URL for a video-only page (OBS).</div>
+    </section>
+
+    <section>
+      <h2>Stats</h2>
+      <div class="stats mono" id="stats"><span>—</span><span></span></div>
+      <div class="err hidden" id="phoneErr"></div>
+    </section>
+  </aside>
+
+  <script type="module" src="/static/viewer.js"></script>
+</body>
+</html>

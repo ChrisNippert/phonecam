@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#000000">
+  <title>PhoneCam · Phone</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body class="phone">
+  <video id="preview" autoplay playsinline muted></video>
+  <div id="dimnote" class="dimnote hidden">Preview off (still streaming) — tap Preview to show</div>
+
+  <div class="topbar">
+    <span><span id="wsDot" class="dot"></span><span id="wsText">Connecting…</span></span>
+    <span><span id="peerDot" class="dot"></span><span id="peerText">No viewer</span></span>
+    <span id="actual" class="stat mono muted"></span>
+  </div>
+
+  <div id="startScreen" class="center">
+    <div class="box">
+      <h2 style="margin:0 0 6px">PhoneCam</h2>
+      <p class="muted" id="startHint">Tap start, allow camera access, then open the viewer on your PC.</p>
+      <button id="startBtn" class="primary">Start camera</button>
+    </div>
+  </div>
+
+  <div id="error" class="error hidden"></div>
+
+  <div class="bottombar hidden" id="controls">
+    <button id="flipBtn">⟲ Flip</button>
+    <button id="torchBtn" class="hidden">🔦 Torch</button>
+    <button id="previewBtn" class="on">Preview</button>
+  </div>
+
+  <script type="module" src="/static/phone.js"></script>
+</body>
+</html>

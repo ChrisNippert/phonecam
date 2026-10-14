@@ -1,0 +1,143 @@
+:root {
+  --bg: #0e1013;
+  --panel: #171a1f;
+  --panel-2: #1f2329;
+  --line: #2b3038;
+  --text: #e7e9ec;
+  --muted: #8b939e;
+  --accent: #4fd1a5;
+  --warn: #f2b84b;
+  --bad: #f06b6b;
+  --radius: 10px;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font: 14px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+button, select, input { font: inherit; color: inherit; }
+button {
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+button:hover { border-color: var(--muted); }
+button.primary { background: var(--accent); color: #062018; border-color: transparent; font-weight: 600; }
+button.on { border-color: var(--accent); color: var(--accent); }
+button:disabled { opacity: .45; cursor: default; }
+select {
+  background: var(--panel-2);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 6px 8px;
+  width: 100%;
+}
+input[type=range] { width: 100%; accent-color: var(--accent); }
+input[type=checkbox] { accent-color: var(--accent); width: 16px; height: 16px; }
+
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--muted); margin-right: 6px; vertical-align: 1px; }
+.dot.ok { background: var(--accent); }
+.dot.wait { background: var(--warn); }
+.dot.bad { background: var(--bad); }
+.muted { color: var(--muted); }
+.mono { font-family: ui-monospace, "SF Mono", Consolas, monospace; font-size: 12.5px; }
+.hidden { display: none !important; }
+
+/* ---------- landing ---------- */
+.landing { max-width: 520px; margin: 0 auto; padding: 48px 20px; }
+.landing h1 { font-size: 22px; margin: 0 0 6px; }
+.landing .cards { display: grid; gap: 12px; margin-top: 24px; }
+.landing a.card {
+  display: block; padding: 18px; border: 1px solid var(--line); border-radius: var(--radius);
+  background: var(--panel); color: var(--text); text-decoration: none;
+}
+.landing a.card:hover { border-color: var(--accent); }
+.landing a.card b { display: block; font-size: 16px; margin-bottom: 2px; }
+
+/* ---------- phone ---------- */
+body.phone { overflow: hidden; background: #000; }
+.phone #preview {
+  position: fixed; inset: 0; width: 100%; height: 100%; object-fit: contain; background: #000;
+}
+.phone .topbar, .phone .bottombar {
+  position: fixed; left: 0; right: 0; padding: 12px 14px;
+  display: flex; gap: 8px; align-items: center;
+  background: linear-gradient(rgba(0,0,0,.75), rgba(0,0,0,0));
+  padding-top: max(12px, env(safe-area-inset-top));
+}
+.phone .topbar { top: 0; flex-wrap: wrap; font-size: 13px; }
+.phone .topbar .stat { margin-left: auto; }
+.phone .bottombar {
+  bottom: 0; justify-content: center;
+  background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,.75));
+  padding-bottom: max(18px, env(safe-area-inset-bottom));
+}
+.phone .bottombar button { padding: 12px 16px; background: rgba(30,34,40,.85); }
+.phone .center {
+  position: fixed; inset: 0; display: grid; place-items: center; text-align: center; padding: 24px;
+}
+.phone .center .box { max-width: 340px; }
+.phone .center button.primary { font-size: 17px; padding: 14px 28px; margin-top: 12px; }
+.phone .error {
+  position: fixed; left: 12px; right: 12px; top: 60px; padding: 10px 12px; border-radius: 8px;
+  background: rgba(120, 30, 30, .9); font-size: 13px;
+}
+.phone.dimmed #preview { opacity: 0; }
+.phone .dimnote { position: fixed; inset: 0; display: grid; place-items: center; color: var(--muted); pointer-events: none; }
+
+/* ---------- viewer ---------- */
+body.viewer { display: grid; grid-template-columns: 1fr 320px; height: 100vh; overflow: hidden; }
+.viewer .stage { position: relative; background: #000; overflow: hidden; display: grid; place-items: center; }
+.viewer .stage video {
+  position: absolute; left: 50%; top: 50%; width: 100%; height: 100%;
+  transform: translate(-50%, -50%); object-fit: contain;
+}
+.viewer .stage.cover video { object-fit: cover; }
+.viewer .overlay {
+  position: absolute; left: 12px; top: 12px; padding: 4px 8px; border-radius: 6px;
+  background: rgba(0,0,0,.55); font-size: 12px; pointer-events: none;
+}
+.viewer .rec { position: absolute; right: 12px; top: 12px; color: var(--bad); font-weight: 600; font-size: 13px; }
+.viewer .waiting { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 24px; }
+.viewer .waiting img { width: 220px; height: 220px; background: #fff; border-radius: 8px; padding: 6px; margin: 14px auto; display: block; }
+.viewer .waiting .url { user-select: all; }
+
+.viewer aside {
+  background: var(--panel); border-left: 1px solid var(--line); overflow-y: auto; padding: 14px;
+}
+.viewer section { border-bottom: 1px solid var(--line); padding: 12px 0; }
+.viewer section:first-child { padding-top: 0; }
+.viewer section:last-child { border-bottom: 0; }
+.viewer h2 { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; font-weight: 600; }
+.viewer .row { display: grid; grid-template-columns: 92px 1fr; gap: 8px; align-items: center; margin-bottom: 8px; }
+.viewer .row > label { color: var(--muted); }
+.viewer .row .val { text-align: right; }
+.viewer .btns { display: flex; flex-wrap: wrap; gap: 6px; }
+.viewer .btns button { flex: 1 1 auto; }
+.viewer .seg { display: flex; gap: 0; }
+.viewer .seg button { flex: 1; border-radius: 0; padding: 6px 4px; font-size: 12.5px; }
+.viewer .seg button:first-child { border-radius: 8px 0 0 8px; }
+.viewer .seg button:last-child { border-radius: 0 8px 8px 0; }
+.viewer .seg button + button { border-left: 0; }
+.viewer .hint { font-size: 12px; color: var(--muted); margin-top: 4px; }
+.viewer .stats { display: grid; grid-template-columns: auto 1fr; gap: 2px 12px; }
+.viewer .stats span:nth-child(odd) { color: var(--muted); }
+.viewer .err { color: var(--bad); font-size: 12.5px; margin-top: 6px; }
+.viewer .slider-row { display: grid; grid-template-columns: 1fr 74px; gap: 8px; align-items: center; }
+
+body.viewer.clean { grid-template-columns: 1fr; background: transparent; }
+body.viewer.clean aside, body.viewer.clean .overlay, body.viewer.clean .waiting { display: none; }
+body.viewer.clean .stage { background: transparent; }
+body.viewer.nopanel { grid-template-columns: 1fr; }
+body.viewer.nopanel aside { display: none; }
+
+@media (max-width: 760px) {
+  body.viewer { grid-template-columns: 1fr; grid-template-rows: 45vh 1fr; height: auto; min-height: 100vh; overflow: auto; }
+  .viewer aside { border-left: 0; border-top: 1px solid var(--line); }
+}
