@@ -5,6 +5,8 @@ resolution, frame rate, quality and more from the PC.
 
 No installs, no app on the phone — just Python 3.8+ on the PC and a browser on each end.
 
+**NOTE: This was completely vibe coded by claude opus 5.5. It does work for my purposes as an IP webcam but figured a disclaimer was a good idea here**
+
 ## Run
 
 ```
